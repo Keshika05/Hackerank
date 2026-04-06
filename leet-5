@@ -1,0 +1,17 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        mapping = {')': '(', '}': '{', ']': '['}
+        
+        for char in s:
+            if char in mapping:  # It's a closing bracket
+                # Pop the top element if stack isn't empty, else use a dummy
+                top = stack.pop() if stack else '#'
+                if mapping[char] != top:
+                    return False
+            else:
+                # It's an opening bracket, push it onto the stack
+                stack.append(char)
+        
+        # If the stack is empty, all brackets were matched correctly
+        return not stack
